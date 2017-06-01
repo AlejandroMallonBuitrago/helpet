@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+<?php @session_start(); ?>
 <html>
 <head>
 <title>Ayuda a encontrar | Helpet</title>
@@ -10,7 +11,7 @@
 <body>
 
 <?php
-@session_start();
+
 if (!isset($_SESSION['email']))
    header("location:inicioSesion.php");
 ?>

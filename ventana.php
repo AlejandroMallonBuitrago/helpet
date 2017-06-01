@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<?php session_start(); ?>
+<?php include ("seguridad.php");
+?>
 <html>
 <head>
 <title>Ayuda a encontrar | Helpet</title>
@@ -16,7 +17,6 @@
     
     
     body {
-        margin-top: 5%;
         background-image: none;
         background-color: white /* #f6f6f6 */;
         transition: 1s;
@@ -54,7 +54,6 @@
    
     height: 100px;
     background-color: white;
-    border-bottom: 1px solid #f6f6f6;
     padding: 1rem .7rem;
     transition: all .25s ease;
 }
@@ -64,12 +63,16 @@
     height: 54px;
     background-color: white;
     border-radius: 0px 0px 12px 12px;
+    border: 1px solid #f1f1f1;
+    padding-left: 10px;
+    padding-bottom: 70px;
 }
 
 #cajas3:hover {
     
     background-color: #f6f6f6;
     cursor: pointer;
+    border-color: #f1f1f1;
 }
 
 /*-------------------------MASONRY----------------------------*/
@@ -97,15 +100,29 @@ body { font-family: sans-serif; }*/
 .grid-item {
 
   float: left;
-  margin-bottom: 10px;
-  border-radius: 12px 12px 12px 12px;
-  width: 200px;
-  box-shadow: 0 5px 10px 0 rgba(0,0,0,.1), 0 1px 1px 0 transparent;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 200px;
+    border-radius: 12px 12px 12px 12px;
   font-size: 0.7rem;
   line-height: 0.8rem;
 
 }
 
+.grid-item:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+.hvr-float:hover,
+.hvr-float:focus,
+.hvr-float:active {
+  transform: translateY(-8px);
+}
 
 /*-------------------------Fixed Button----------------------------*/
 
@@ -131,23 +148,119 @@ body { font-family: sans-serif; }*/
 /*-------------------------MODALES----------------------------*/
 
 
+
+
+
+.modal2 {
+  background-color: white;
+  display: none;
+  position: fixed;
+  top: 30%;
+  left: 46%;
+  width: 500px;
+  height: 600px;
+  margin-left: -200px;
+  margin-top: -150px;
+  padding: 50px;
+  border-radius: 5px;
+  z-index: 10;
+  box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.7);
+  border-bottom: 7px solid #D8D8D8;
+  border-right: 4px solid #D8D8D8;
+  overflow: auto;
+}
+
+.close-modal2 {
+  color:  #000;
+  text-decoration: none;
+  float: right;
+  position: absolute;
+  top: 10px;
+  right: 20px
+}
+
+@media (max-width : 37.500rem) {
+
+  .modal2 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 1.250rem
+  }
+  
+  .close-modal2{
+    display: block;
+   position: relative;
+   padding: 5px 10px 20px 0
+  }
+  
+  .modal-content2{
+    clear: both;
+    padding-right: 1.25rem
+  }
+  
+}
+
+
+.inputRegistro2 {
+  width: 300px;
+  height: 60px;
+  margin-bottom: 5px;
+  padding: 0 15px 2px;
+  font-size: 20px;
+  background: white;
+  border: 3px solid #ebebeb;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 -3px #ebebeb;
+  box-shadow: inset 0 -3px #ebebeb;
+  
+}
+
+.inputRegistro2:focus {
+  border-color: #fe8332;
+  outline: none;
+  -webkit-box-shadow: inset 0 -3px #fe8332;
+  box-shadow: inset 0 -3px #fe8332;
+}
+
+
+
 </style>
 
 </head>
 <body>
 
 
+<!-- Dropdown Structure -->
 
+<nav style="position: fixed; z-index: 5; background-color: #8ccef1;  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2);">
+  <div class="nav-wrapper">
+    <a href="#!" class="brand-logo">Logo</a>
+    <ul class="right hide-on-med-and-down">
+      <li><a href="sass.html">Aquí va algo jeje</a></li>
+      <li><a href="logout.php">Cerrar Sesión</a></li>
+      <!-- Dropdown Trigger -->
+      <li><a style="padding-left: 70px; padding-right: 70px;" class="dropdown-button" href="#!" data-activates="dropdown1">Perfil<i class="material-icons right">arrow_drop_down</i></a></li>
+    </ul>
+  </div>
+</nav>
+<ul id="dropdown1" class="dropdown-content" style="margin-top: 65px; margin-right: 10px;">
+  <li><a href="#!">Hola, <?php print($_SESSION['nombre']); ?></a></li>
+  <li><a href="#!">Mi perfil</a></li>
+  <li class="divider"></li>
+  <li><a href="#!">Configuración</a></li>
+</ul>
 
-<button><a href="logout.php">Cerrar Sesión</a></button>
 
 
 <?php
 
 $_SESSION['email'];
+$_SESSION['nombre'];
 print($_SESSION['email']);
 
-include ("seguridad.php");
 
 include('misfunciones.php');
 $mysqli = conectaBBDD();
@@ -209,10 +322,10 @@ for ($i = 0; $i < $num_usuarios; $i++) {
 // }
 //echo '<br><br><br><br><br><br><br><br><br><br><br><br><br><br>';
 
-echo '<div class="grid">';
+echo '<div class="grid" style="margin-top: 10%;">';
 for ($i = 0; $i < $num_usuarios; $i++) {
 
-echo '<div class="grid-item" class="hvr-float"><img src="img/'. $usuarios[$i][5] .'.jpg" style="width:100%; border-radius: 12px 12px 0px 0px;"/>';
+echo '<div class="grid-item hvr-float"><img src="img/'. $usuarios[$i][5] .'.jpg" style="width:100%; border-radius: 12px 12px 0px 0px;"/>';
 echo ' <div id="cajas2">';
 echo '     <p class="color1">Recompensa: '  . $usuarios[$i][1] . '€</p>';
 echo '     <p>' . $usuarios[$i][2] . '</p>';
@@ -242,7 +355,7 @@ echo '</div>';
     <i class="large mdi-navigation-menu material-icons">add</i>
   </a>
   <ul>
-    <li><a class="btn-floating red ampliado" href="#modal1">Perdida</a></li>
+    <li><a class="btn-floating red ampliado show-modal2">Perdida</a></li>
     <li><a class="btn-floating blue ampliado">Encontrada</a></li>
     <li><a class="btn-floating yellow ampliado">Adopción</a></li>
   </ul>
@@ -250,18 +363,87 @@ echo '</div>';
 
 <!-- -------------------------------MODALES------------------------ -->
 
-  <div id="modal1" class="modal modal-fixed-footer">
-    <div class="modal-content">
-      <h4>Modal Header</h4>
-      <p>A bunch of text</p>
-    </div>
-    <div class="modal-footer">
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat ">Agree</a>
-    </div>
+
+
+  <div class="modal2">
+    <a class="close-modal2 fixed" href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true">x</span></a>
+    <p style="text-align: center;">Esta comunidad está aquí para ayudarte 💪 ¡Vamos a encontrarlo! 👀🕵️🔍</p>
+
+  <div class="row">
+    <form>
+
+
+              <div class="input-field col s12">
+                  <input id="nombre_mascota" type="text" class="validate">
+                  <label for="nombre_mascota" data-error="wrong" data-success="right">Nombre mascota</label>
+              </div>
+            
+              <div class="input-field col s12">
+
+              <select>
+                <option value="" disabled selected>Elige la mascota</option>
+                <option value="1">Perro</option>
+                <option value="2">Gato</option>
+                <option value="3">Roedor</option>
+                <option value="4">Pajaro</option>
+              </select>
+              <label>Tipo de mascota</label>
+              </div>
+
+              <div class="input-field col s12">
+                <input id="raza" type="text" class="validate">
+                <label for="raza" data-error="wrong" data-success="right">Raza</label>
+              </div>
+
+              <div class="input-field col s12">
+                <input id="pelaje" type="text" class="validate">
+                <label for="pelaje" data-error="wrong" data-success="right">Pelaje</label>
+              </div>
+
+              <div class="input-field col s12">
+              Fecha que se perdió
+              <input type="date" class="datepicker">
+              </div>
+
+              <div class="input-field col s12">
+                <input id="recompensa" type="text" class="validate">
+                <label for="recompensa" data-error="wrong" data-success="right">Recompensa</label>
+              </div>
+
+              <div class="input-field col s12">
+                <input id="provincia" type="text" class="validate">
+                <label for="provincia" data-error="wrong" data-success="right">Provincia</label>
+              </div>
+
+
+              <div class="input-field col s12">
+                <input id="ciudad" type="text" class="validate">
+                <label for="ciudad" data-error="wrong" data-success="right">Ciudad</label>
+              </div>
+
+
+              <div class="input-field col s12">
+                <input id="codigo postal" type="text" class="validate">
+                <label for="codigo postal" data-error="wrong" data-success="right">Código postal</label>
+              </div>
+
+              <div class="row">
+                <div class="input-field col s12">
+                  <textarea id="textarea1" class="materialize-textarea" data-length="120"></textarea>
+                  <label for="textarea1">Textarea</label>
+                </div>
+              </div>
+
+
+
+
+    </form>
   </div>
-         
+        
 
 
+   <div id="errorConf"></div>
+  </div>    
 
 
 
@@ -281,8 +463,34 @@ echo '</div>';
 
   $('.grid').masonry({
   itemSelector: '.grid-item',
-  columnWidth: 210
+  columnWidth: 220
   });
+
+function openLightBox(){
+  var modal = $('.modal2');
+$('.show-modal2').on('click', function() {
+ modal.fadeIn();
+});
+
+$('.close-modal2').on('click', function() {
+ modal.fadeOut();
+});
+};
+openLightBox();
+
+
+  $(document).ready(function() {
+    $('select').material_select();
+  });
+            
+
+$('.datepicker').pickadate({
+    selectMonths: true, // Creates a dropdown to control month
+    selectYears: 1 // Creates a dropdown of 15 years to control year
+  });
+
+
+$(".dropdown-button").dropdown();
 
 </script>
 </html>

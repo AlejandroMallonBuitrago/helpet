@@ -6,10 +6,8 @@ include ("comprobarSesion.php");
 
 if (isset($_GET['err'])){
 $_err = $_GET['err'];
-echo $_err;
 if (isset($_GET['email'])){
   $_email = $_GET['email'];
-echo $_email;
 }
 }
 ?>
