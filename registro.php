@@ -29,8 +29,37 @@ $comprueba_email = $mysqli ->
           //encriptamos la contraseña
     $pass = password_hash($pass, PASSWORD_DEFAULT);
     
+ // coge imagen aleatoria y la pone
+        $carpeta="img_user/";
+ 
+# definimos un array que contendra todas las imagenes de la carpeta
+$imagenes=array();
+ 
+// devuelve el tipo mime de su extensión
+$finfo = finfo_open(FILEINFO_MIME_TYPE);
+ 
+// recorremos toda la carpeta para buscar los archivos
+foreach (glob($carpeta."*") as $filename) {
+    $mime=finfo_file($finfo, $filename);
+    if($mime=="image/jpeg" || $mime=="image/pjpeg" || $mime=="image/gif" || $mime=="image/png")
+    {
+        # guardamos las imagenes en un array
+        $imagenes[]=$filename;
+    }
+}
+ 
+finfo_close($finfo);
+ 
+# buscamos un numero aleatorio entre la cantidad de imagenes encontradas
+$aleatorio=rand(0,count($imagenes)-1);
+ 
+# mostramos dicha imagen
+//echo '<img src="'.$imagenes[$aleatorio].'">';
+
+
+
     $inserta_usuario = $mysqli -> 
-            query("INSERT INTO `usuario` (`id_usuario`, `email`, `password`, `nombre`, `apellidos`, `movil`, `tipo`) VALUES (NULL, '$email', '$pass', '$nombre', '$apellidos', '$movil', '0');");
+            query("INSERT INTO `usuario` (`id_usuario`, `email`, `password`, `nombre`, `apellidos`, `movil`, `tipo`, `foto`) VALUES (NULL, '$email', '$pass', '$nombre', '$apellidos', '$movil', '0', '$imagenes[$aleatorio]');");
     if ($mysqli->affected_rows == 1){
         
             $resultado_consulta = $mysqli->query("SELECT `id_usuario` FROM usuario WHERE email= '$email'");

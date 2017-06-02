@@ -237,9 +237,9 @@ img {
 
 <nav style="position: fixed; z-index: 5; background-color: #8ccef1;  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2);">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo">Logo</a>
+    <a href="#!" class="brand-logo"><img style="transform: scale(0.15, 0.15); position: absolute; left: -380px;; top: -140px;" src="img/logo.png" /></a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="sass.html">Aquí va algo jeje</a></li>
+      <li><a href="ventana.php">Inicio</a></li>
       <li><a href="logout.php">Cerrar Sesión</a></li>
       <!-- Dropdown Trigger -->
       <li><a style="padding-left: 70px; padding-right: 70px;" class="dropdown-button" href="#!" data-activates="dropdown1">Perfil<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -248,7 +248,7 @@ img {
 </nav>
 <ul id="dropdown1" class="dropdown-content" style="margin-top: 65px; margin-right: 10px;">
   <li><a href="#!">Hola, <?php print($_SESSION['nombre']); ?></a></li>
-  <li><a href="#!">Mi perfil</a></li>
+  <li><a href="#!" onclick="cogeId(<?php print($_SESSION['id_usuario']); ?>)">Mi perfil</a></li>
   <li class="divider"></li>
   <li><a href="#!">Configuración</a></li>
 </ul>
