@@ -258,7 +258,7 @@ $adn = $consulta_adopcion->fetch_array();
             <h1><?php echo $nombre; ?></h1>
             <p style="margin-top: 10px;"><?php echo $email; ?></p>
           </div> 
-          <div class="description-profile">Front-end | Security Researcher | CSS Warrior | <a href="https://twitter.com/bullgit" title="bullgit"><strong>@bullgit</strong></a> | I love to create small things for the internet!</div>
+          <div class="description-profile"><?php echo $movil.' | '.; ?></div>
        <ul class="data-user">
         <li><a><strong><?php echo $p['contador'];?></strong><span>Perdidos</span></a></li>
         <li><a><strong><?php echo $e['contador'];?></strong><span>Encontrados</span></a></li>
