@@ -949,7 +949,7 @@ $r = $consulta_mascotas->fetch_array();
 
 
 <div id="cajaSup" class="inicioCajaSup">
-    <img style="transform: scale(0.15, 0.15); position: absolute; left: -380px;; top: -120px;" src="img/logo.png" />
+    <a href="index.php"><img style="transform: scale(0.15, 0.15); position: absolute; left: -380px;; top: -120px;" src="img/logo.png" /></a>
         
     <div id="estrellitas" class="island_wrapper6 ocultar">
   

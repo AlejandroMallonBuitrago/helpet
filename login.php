@@ -54,6 +54,7 @@ if ($numero_usuario > 0) {
             $_SESSION['apellidos'] = $r['apellidos'];
             $_SESSION['email'] = $r['email'];
             $_SESSION['movil'] = $r['movil'];
+            $_SESSION['foto'] = $r['foto'];
             
            header("location:ventana.php");
             

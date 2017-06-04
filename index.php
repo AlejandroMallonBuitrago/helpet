@@ -389,7 +389,7 @@ $t = $consulta_total->fetch_array();
 					<h1><a href="index.html">Helpet</a> by smartech</h1>
 					<nav id="nav">
 						<ul>
-							<li><a href="inicioSesion.php" class="button" target="_blank">Sign Up</a></li>
+							<li><a href="inicioSesion.php" class="button">Sign Up</a></li>
 						</ul>
 					</nav>
 				</header>
@@ -399,8 +399,8 @@ $t = $consulta_total->fetch_array();
                                     <h2>Helpet</h2>
                                         <div class='console-container'><span class="finita">Ayuda a encontrar </span><span id='text'></span><div class='console-underscore' id='console'>&#95;</div></div>
 					<ul class="actions">
-                                            <li><a href="inicioSesion.php" target="_blank" class="button special" style="margin-left: 7.5em; margin-top: 50px;">Registrarte</a></li>
-						<li><a href="inicioSesion.php" class="button" target="_blank" style="margin-top: 50px;">Entrar</a></li>
+                                            <li><a href="inicioSesion.php" class="button special" style="margin-left: 7.5em; margin-top: 50px;">Registrarte</a></li>
+						<li><a href="inicioSesion.php" class="button" style="margin-top: 50px;">Entrar</a></li>
 					</ul>
 
 

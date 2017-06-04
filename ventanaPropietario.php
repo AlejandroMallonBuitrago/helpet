@@ -171,6 +171,110 @@ footer h4 a {
   text-decoration: none;
   color: #3498db;
 }
+
+
+/* ----------------------------------------------------------- */
+
+/*__________________________Cajas Animales_____________________________*/
+
+
+#cajas{
+   
+    margin-left: 2%;
+    margin-top: 2%;
+    background-color: white;
+    border-radius: 12px 12px 12px 12px;
+    width: 250px;
+    float: left;
+/*    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);*/
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.1), 0 2px 5px 0 transparent;
+/*    display: block;
+    overflow: hidden;
+    position: static;*/
+    font-size: 0.7rem;
+    line-height: 0.8rem;
+   
+    
+/*    display: inline-block;
+    break-inside: avoid;*/
+
+}
+
+#cajas2{
+   
+    height: 100px;
+    background-color: white;
+    padding: 1rem .7rem;
+    transition: all .25s ease;
+}
+
+#cajas3{
+   
+    height: 54px;
+    background-color: white;
+    border-radius: 0px 0px 12px 12px;
+    border: 1px solid #f1f1f1;
+    padding-left: 10px;
+    padding-bottom: 70px;
+}
+
+#cajas3:hover {
+    
+    background-color: #f6f6f6;
+    cursor: pointer;
+    border-color: #f1f1f1;
+}
+
+/*-------------------------MASONRY----------------------------*/
+
+/* * { box-sizing: border-box; }
+
+body { font-family: sans-serif; }*/
+
+/* ---- grid ---- */
+
+.grid {
+  max-width: 100%;
+  padding-left: 5%;
+}
+
+/* clearfix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- grid-item ---- */
+
+.grid-item {
+
+  float: left;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 200px;
+    border-radius: 12px 12px 12px 12px;
+  font-size: 0.7rem;
+  line-height: 0.8rem;
+
+}
+
+.grid-item:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+.hvr-float:hover,
+.hvr-float:focus,
+.hvr-float:active {
+  transform: translateY(-8px);
+}
+
+
 </style>
 
 </head>
@@ -226,7 +330,7 @@ $adn = $consulta_adopcion->fetch_array();
 
 <nav style="position: fixed; z-index: 5; background-color: #8ccef1;  box-shadow: 0 2px 6px 0 rgba(0,0,0,0.2); margin-top: -10px;">
   <div class="nav-wrapper">
-    <a href="#!" class="brand-logo"><img style="transform: scale(0.15, 0.15); position: absolute; left: -380px;; top: -140px;" src="img/logo.png" /></a>
+    <a href="ventana.php" class="brand-logo"><img style="transform: scale(0.15, 0.15); position: absolute; left: -380px;; top: -140px;" src="img/logo.png" /></a>
     <ul class="right hide-on-med-and-down">
       <li><a href="ventana.php">Inicio</a></li>
       <li><a href="logout.php">Cerrar Sesión</a></li>
@@ -236,8 +340,8 @@ $adn = $consulta_adopcion->fetch_array();
   </div>
 </nav>
 <ul id="dropdown1" class="dropdown-content" style="margin-top: 65px; margin-right: 10px;">
-  <li><a href="#!">Hola, <?php print($_SESSION['nombre']); ?></a></li>
-  <li><a href="#!" onclick="cogeId(<?php print($_SESSION['id_usuario']); ?>)">Mi perfil</a></li>
+  <li><a href="#!">Hola, <?php print($_SESSION['nombre']); ?> <?php  echo '<img style="border-radius: 100%; width: 50px;  vertical-align: middle; margin-left: 15px;" src="'.$foto.'" alt="helpet | '.$nombre.', '.$apellidos.'"/>'; ?></a></li>
+  <li><a href="#!" onclick="cogeIdMi(<?php print($_SESSION['id_usuario']); ?>)">Mi perfil</a></li>
   <li class="divider"></li>
   <li><a href="#!">Configuración</a></li>
 </ul>
@@ -251,27 +355,50 @@ $adn = $consulta_adopcion->fetch_array();
         <iframe class="profile-bgHome" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d194348.13981549095!2d-3.819622113741848!3d40.4378697577587!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd422997800a3c81%3A0xc436dec1618c2269!2sMadrid!5e0!3m2!1ses!2ses!4v1496396572917" width="2000" height="400" frameborder="0" style="border:0" allowfullscreen></iframe>
 
 
-        <?php  echo '<img class="avatar" src="'.$foto.'" alt="helpet | '.$apellidos.' ,'.$nombre.'"/>'; ?>
+        <?php 
+
+
+            // fecha_a es la primera fecha
+            $fecha_a= $datetime_alta;
+            // fecha_b en este caso es la fecha actual
+            $fecha_b= date("Y/m/d");
+
+            function dias_transcurridos($fecha_i,$fecha_f)
+            {
+            $dias = (strtotime($fecha_i)-strtotime($fecha_f))/86400;
+            $dias = abs($dias); $dias = floor($dias);
+            return $dias;
+            }
+            ?>
+
+
+        <?php  echo '<img class="avatar" src="'.$foto.'" alt="helpet | '.$nombre.', '.$apellidos.'"/>'; ?>
            </div>
           <button>Follow</button>
           <div class="user-profile-data">
             <h1><?php echo $nombre; ?></h1>
             <p style="margin-top: 10px;"><?php echo $email; ?></p>
           </div> 
-          <div class="description-profile"><?php echo $movil.' | '.; ?></div>
+          <div class="description-profile"><?php echo $movil.' | '.dias_transcurridos($fecha_a,$fecha_b).' días de antigüedad' // Sino poner fecha de alta  ?></div>
        <ul class="data-user">
-        <li><a><strong><?php echo $p['contador'];?></strong><span>Perdidos</span></a></li>
-        <li><a><strong><?php echo $e['contador'];?></strong><span>Encontrados</span></a></li>
-        <li><a><strong><?php echo $adn['contador'];?></strong><span>Adopción</span></a></li>
+        <li><a onclick="cargaCentro('1')"><strong><?php echo $p['contador'];?></strong><span>Perdidos</span></a></li>
+        <li><a onclick="cargaCentro('2')"><strong><?php echo $e['contador'];?></strong><span>Encontrados</span></a></li>
+        <li><a onclick="cargaCentro('3')"><strong><?php echo $adn['contador'];?></strong><span>Adopción</span></a></li>
        </ul>
+
+        <div id="cargaMascotas"></div>
+
       </div>
     </div>
 
 
 
 
+
+
 </body>
 
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 <script type="text/javascript">
@@ -311,14 +438,30 @@ function cogeId(id) {
                 var _id_usuario = id;
                 console.log(_id_usuario);
 
-                window.open("ventanaPropietario.php?i="+_id_usuario+"");
+                window.location = ("ventanaPropietario.php?i="+_id_usuario+"");
 
                 };
 
-  $('.grid').masonry({
-  itemSelector: '.grid-item',
-  columnWidth: 220
-  });
+  function cogeIdMi(id) {
+                var _id_usuario = id;
+                console.log(_id_usuario);
+
+                window.location = ("miPerfil.php?i="+_id_usuario+"");
+
+                };
+
+
+
+  function cargaCentro(tipo) {
+
+              if(tipo === '1'){
+                $('#cargaMascotas').load("cargaMascotas.php?t=1");
+              }else if(tipo === '2'){
+                $('#cargaMascotas').load("cargaMascotas.php?t=2");
+              }else if(tipo === '3'){
+                $('#cargaMascotas').load("cargaMascotas.php?t=3");
+              }
+      }    
 
 
 </script>
