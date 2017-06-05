@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?php include ("seguridad.php");
+?>
 <html>
 <head>
 <title>Ayuda a encontrar | Helpet</title>
@@ -11,7 +13,7 @@
 
 
 <?php
-include ("seguridad.php");
+
 
 
 include('misfunciones.php');

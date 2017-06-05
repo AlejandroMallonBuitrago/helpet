@@ -436,7 +436,7 @@ echo '</div>';
             
               <div class="input-field col s12">
 
-              <select>
+              <select id="tipo_mascota">
                 <option value="" disabled selected>Elige la mascota</option>
                 <option value="1">Perro</option>
                 <option value="2">Gato</option>
@@ -458,7 +458,7 @@ echo '</div>';
 
               <div class="input-field col s12">
               Fecha que se perdió
-              <input type="date" class="datepicker">
+              <input id="fecha" type="date" class="datepicker">
               </div>
 
               <div class="input-field col s12">
@@ -479,14 +479,14 @@ echo '</div>';
 
 
               <div class="input-field col s12">
-                <input id="codigo postal" type="text" class="validate">
+                <input id="codigo_postal" type="text" class="validate">
                 <label for="codigo postal" data-error="wrong" data-success="right">Código postal</label>
               </div>
 
               <div class="row">
                 <div class="input-field col s12">
-                  <textarea id="textarea1" class="materialize-textarea" data-length="120"></textarea>
-                  <label for="textarea1">Textarea</label>
+                  <textarea id="descripcion" class="materialize-textarea" data-length="120"></textarea>
+                  <label for="descripcion">Descripcion</label>
                 </div>
               </div>
 
@@ -572,6 +572,51 @@ function cargaCentroPrincipal(id) {
                 });
 
       }    
+
+
+
+  function chequeaMascota() {
+ 
+    var _nombre_mascota = $('#nombre_mascota').val();
+    var _tipo_mascota = $('#tipo_mascota').val();
+    var _raza = $('#raza').val();
+    var _pelaje = $('#pelaje').val();
+    var _fecha = $('#fecha').val();
+    var _recompensa = $('#recompensa').val();
+    var _provincia = $('#provincia').val();
+    var _ciudad = $('#ciudad').val();
+    var _codigo_postal = $('#codigo_postal').val();
+    var _descripcion = $('#descripcion').val();
+
+
+
+    if (_nombre !== "" && _apellidos !== "" && _pass !== "" && _pass2 !== "" && _email !== "" && _movil !== ""){
+   //borrar documents en cada vuelta
+   if (/^\d{9}$/.test(_movil)){
+    if (_pass === _pass2){
+        if( validar_email( _email ) ){
+
+                  document.cookie ='registro_nombre='+_nombre;
+                  document.cookie ='registro_apellidos='+_apellidos;
+                  document.cookie ='registro_pass='+_pass;
+                  document.cookie ='registro_email='+_email;
+                  document.cookie ='registro_movil='+_movil;
+                  window.open("registro.php",'_self');
+
+    }else{
+        document.getElementById('errorCompletar').innerHTML='*Debe ser un email válido';
+    }
+    }else{
+        document.getElementById('errorCompletar').innerHTML='*Deben coincidir las contraseñas';
+    }
+    }else{
+        document.getElementById('errorCompletar').innerHTML='*Deben ser nueve números';
+    }
+    }else{
+        document.getElementById('errorCompletar').innerHTML='*Debes rellenar todos los campos';
+    }
+    };
+
 
 </script>
 </html>

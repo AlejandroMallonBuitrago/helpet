@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<?php include ("seguridad.php");
+?>
 <html>
 <head>
   <meta charset="utf-8">
