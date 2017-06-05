@@ -333,6 +333,7 @@ $adn = $consulta_adopcion->fetch_array();
     <a href="ventana.php" class="brand-logo"><img style="transform: scale(0.15, 0.15); position: absolute; left: -380px;; top: -140px;" src="img/logo.png" /></a>
     <ul class="right hide-on-med-and-down">
       <li><a href="ventana.php">Inicio</a></li>
+       <li><a href="http://localhost/Chat/login.php">Chat<span style="font-size: 10px; padding-top: 20px; margin-left: -20px; position: absolute;">BETA</span></a></li>
       <li><a href="logout.php">Cerrar Sesión</a></li>
       <!-- Dropdown Trigger -->
       <li><a style="padding-left: 70px; padding-right: 70px;" class="dropdown-button" href="#!" data-activates="dropdown1">Perfil<i class="material-icons right">arrow_drop_down</i></a></li>

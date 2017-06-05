@@ -41,7 +41,7 @@ $finfo = finfo_open(FILEINFO_MIME_TYPE);
 // recorremos toda la carpeta para buscar los archivos
 foreach (glob($carpeta."*") as $filename) {
     $mime=finfo_file($finfo, $filename);
-    if($mime=="image/jpeg" || $mime=="image/pjpeg" || $mime=="image/gif" || $mime=="image/png")
+    if($mime=="image/jpeg" || $mime=="image/pjpeg" || $mime=="image/gif" || $mime=="image/png" || $mime=="image/jpg")
     {
         # guardamos las imagenes en un array
         $imagenes[]=$filename;

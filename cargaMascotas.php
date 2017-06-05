@@ -51,7 +51,7 @@ for ($i = 0; $i < $num_usuarios; $i++) {
    echo '<div class="grid" style="margin-top: 10%;">';
 for ($i = 0; $i < $num_usuarios; $i++) {
 
-echo '<div class="grid-item hvr-float"><img src="img/'. $usuarios[$i][5] .'.jpg" style="width:100%; border-radius: 12px 12px 0px 0px;"/>';
+echo '<div class="grid-item hvr-float"><img src="'. $usuarios[$i][5] .'" style="width:100%; border-radius: 12px 12px 0px 0px;"/>';
 echo ' <div id="cajas2">';
 echo '     <p class="color1">Recompensa: '  . $usuarios[$i][1] . '€</p>';
 echo '     <p>' . $usuarios[$i][2] . '</p>';

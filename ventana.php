@@ -1,5 +1,11 @@
 <!DOCTYPE html>
 <?php include ("seguridad.php");
+
+
+if (isset($_GET['err'])){
+$_err = $_GET['err'];
+
+}
 ?>
 <html>
 <head>
@@ -249,10 +255,94 @@ img {
 }
 
 
+/* ------------------------MODAL ERR------------------------ */
+
+/*-------------------------MODALES----------------------------*/
+
+
+
+
+
+.modal22 {
+  background-color: white;
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  height: 200px;
+  margin-left: -200px;
+  margin-top: -150px;
+  padding: 50px;
+  border-radius: 5px;
+  z-index: 10;
+  box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.7);
+  border-bottom: 7px solid #D8D8D8;
+  border-right: 4px solid #D8D8D8;
+  overflow: auto;
+}
+
+.close-modal22 {
+  color:  #000;
+  text-decoration: none;
+  float: right;
+  position: absolute;
+  top: 10px;
+  right: 20px
+}
+
+@media (max-width : 37.500rem) {
+
+  .modal22 {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 1.250rem
+  }
+  
+  .close-modal22{
+    display: block;
+   position: relative;
+   padding: 5px 10px 20px 0
+  }
+  
+  .modal-content22{
+    clear: both;
+    padding-right: 1.25rem
+  }
+  
+}
+
+
+.inputRegistro22 {
+  width: 300px;
+  height: 60px;
+  margin-bottom: 5px;
+  padding: 0 15px 2px;
+  font-size: 20px;
+  background: white;
+  border: 3px solid #ebebeb;
+  border-radius: 4px;
+  -webkit-box-shadow: inset 0 -3px #ebebeb;
+  box-shadow: inset 0 -3px #ebebeb;
+  
+}
+
+.inputRegistro22:focus {
+  border-color: #fe8332;
+  outline: none;
+  -webkit-box-shadow: inset 0 -3px #fe8332;
+  box-shadow: inset 0 -3px #fe8332;
+}
+
+
+
 </style>
 
 </head>
-<body>
+<body onload="chequeaUrl();">
 
 <?php 
 
@@ -278,6 +368,7 @@ $numero_usuario12 = $resultado_consulta12->num_rows;
     <a href="index.php" class="brand-logo"><img style="transform: scale(0.15, 0.15); position: absolute; left: -380px;; top: -140px;" src="img/logo.png" /></a>
     <ul class="right hide-on-med-and-down">
       <li><a href="ventana.php">Inicio</a></li>
+       <li><a href="http://localhost/Chat/login.php">Chat<span style="font-size: 10px; padding-top: 20px; margin-left: -20px; position: absolute;">BETA</span></a></li>
       <li><a href="logout.php">Cerrar Sesión</a></li>
       <!-- Dropdown Trigger -->
       <li><a style="padding-left: 70px; padding-right: 70px;" class="dropdown-button" href="#!" data-activates="dropdown1">Perfil<i class="material-icons right">arrow_drop_down</i></a></li>
@@ -381,7 +472,7 @@ $color = "colorPerdido";
 }
 
 
-echo '<div class="grid-item hvr-float"><img class="'.$color.'" src="img/'. $usuarios[$i][5] .'.jpg" style="width:100%; border-radius: 12px 12px 0px 0px;"/>';
+echo '<div class="grid-item hvr-float"><img class="'.$color.'" src="'. $usuarios[$i][5] .'" style="width:100%; border-radius: 12px 12px 0px 0px;"/>';
 echo ' <div id="cajas2">';
 echo '     <p class="color1">Recompensa: '  . $usuarios[$i][1] . '€</p>';
 echo '     <p>' . $usuarios[$i][2] . '</p>';
@@ -423,7 +514,7 @@ echo '</div>';
 
   <div class="modal2">
     <a class="close-modal2 fixed" href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true">x</span></a>
-    <p style="text-align: center;">Esta comunidad está aquí para ayudarte 💪 ¡Vamos a encontrarlo! 👀🕵️🔍</p>
+    <h5 style="text-align: center;">SUBE TU MASCOTA PERDIDA 💪 ¡Vamos a encontrarla! 👀🕵️🔍</h5>
 
   <div class="row">
     <form>
@@ -490,7 +581,7 @@ echo '</div>';
                 </div>
               </div>
 
-
+              <a class="action-button shadow animateBtn orange" onclick="chequeaMascota('Perdido');">Subir</a>
 
 
     </form>
@@ -498,11 +589,31 @@ echo '</div>';
         
 
 
-   <div id="errorConf"></div>
+  
   </div>    
 
-</div>
 
+
+   <div class="modal22">
+   <a class="close-modal22 fixed" href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true">x</span></a>
+    <a class="close-modal22" href="#"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+  
+    <div id="errorConf"></div>
+
+
+          
+        </div>
+
+
+
+
+
+
+   
+  </div> 
+
+</div>
+<div id="err" style="visibility: hidden;"><?php echo $_err; ?></div>
 
     </body>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
@@ -543,6 +654,18 @@ $('.close-modal2').on('click', function() {
 };
 openLightBox();
 
+function openLightBox2(){
+  var modal = $('.modal22');
+$('.show-modal22').on('click', function() {
+ modal.fadeIn();
+});
+
+$('.close-modal22').on('click', function() {
+ modal.fadeOut();
+});
+};
+openLightBox2();
+
 
   $(document).ready(function() {
     $('select').material_select();
@@ -575,7 +698,9 @@ function cargaCentroPrincipal(id) {
 
 
 
-  function chequeaMascota() {
+  function chequeaMascota(estado) {
+
+    var _estado = estado;
  
     var _nombre_mascota = $('#nombre_mascota').val();
     var _tipo_mascota = $('#tipo_mascota').val();
@@ -588,35 +713,71 @@ function cargaCentroPrincipal(id) {
     var _codigo_postal = $('#codigo_postal').val();
     var _descripcion = $('#descripcion').val();
 
+    console.log(_nombre_mascota);
+    console.log(_tipo_mascota);
+    console.log(_raza);
+    console.log(_pelaje);
+    console.log(_fecha);
+    console.log(_recompensa);
+    console.log(_provincia);
+    console.log(_ciudad);
+    console.log(_codigo_postal);
+    console.log(_descripcion);
 
+    
 
-    if (_nombre !== "" && _apellidos !== "" && _pass !== "" && _pass2 !== "" && _email !== "" && _movil !== ""){
-   //borrar documents en cada vuelta
-   if (/^\d{9}$/.test(_movil)){
-    if (_pass === _pass2){
-        if( validar_email( _email ) ){
+                  document.cookie ='nombre_mascota='+_nombre_mascota;
+                  document.cookie ='tipo_mascota='+_tipo_mascota;
+                  document.cookie ='raza='+_raza;
+                  document.cookie ='pelaje='+_pelaje;
+                  document.cookie ='fecha='+_fecha;
+                  document.cookie ='recompensa='+_recompensa;
+                  document.cookie ='provincia='+_provincia;
+                  document.cookie ='ciudad='+_ciudad;
+                  document.cookie ='codigo_postal='+_codigo_postal;
+                  document.cookie ='descripcion='+_descripcion;
+                  document.cookie ='estado='+_estado;
+                  window.open("subeMascota.php",'_self');
 
-                  document.cookie ='registro_nombre='+_nombre;
-                  document.cookie ='registro_apellidos='+_apellidos;
-                  document.cookie ='registro_pass='+_pass;
-                  document.cookie ='registro_email='+_email;
-                  document.cookie ='registro_movil='+_movil;
-                  window.open("registro.php",'_self');
-
-    }else{
-        document.getElementById('errorCompletar').innerHTML='*Debe ser un email válido';
-    }
-    }else{
-        document.getElementById('errorCompletar').innerHTML='*Deben coincidir las contraseñas';
-    }
-    }else{
-        document.getElementById('errorCompletar').innerHTML='*Deben ser nueve números';
-    }
-    }else{
-        document.getElementById('errorCompletar').innerHTML='*Debes rellenar todos los campos';
-    }
     };
 
+
+
+  function chequeaUrl() {
+                
+                var _err = document.getElementById("err").innerHTML;
+
+                console.log(_err);
+                var modal = $('.modal22');
+                var verify = $('#verify');
+                var cross = $('#cross');
+
+                if (_err !== "" || _err !== null){
+                    
+               if( _err === 'ok' ){
+                   modal.fadeIn();
+                  $('.close-modal2').on('click', function() {
+                  modal.fadeOut();
+                  });
+                  verify.removeClass('hidden');
+                  cross.addClass('hidden');
+                  document.getElementById('errorConf').innerHTML='<span style="color: green;">*Mascota insertada correctamente</span>';
+                }else if( _err === '1' ){
+                   modal.fadeIn();
+                  $('.close-modal2').on('click', function() {
+                  modal.fadeOut();
+                  });
+                  verify.addClass('hidden');
+                  cross.removeClass('hidden');
+                  document.getElementById('errorConf').innerHTML='<span style="color: red;">*Error, no se ha insertado correctamente, prueba de nuevo</span>';
+                }
+
+
+
+              }else{
+                  
+              }
+            };
 
 </script>
 </html>
