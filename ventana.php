@@ -226,6 +226,28 @@ img {
 }
 
 
+/* -----------------------------COLORES ESTADOS MASCOTAS--------------------------------- */
+
+.colorPerdido{
+  border-bottom: 3px solid red;
+}
+
+.colorEncontrado{
+  border-bottom: 3px solid orange;
+}
+
+.colorRecuperado{
+  border-bottom: 3px solid green;
+}
+
+.colorAdopcion{
+  border-bottom: 3px solid blue;
+}
+
+.colorAdoptado{
+  border-bottom: 3px solid yellow;
+}
+
 
 </style>
 
@@ -266,10 +288,10 @@ $numero_usuario12 = $resultado_consulta12->num_rows;
   <li><a href="#!">Hola, <?php print($_SESSION['nombre']); ?> <?php  echo '<img style="border-radius: 100%; width: 50px;  vertical-align: middle; margin-left: 15px;" src="'.$foto.'" alt="helpet | '.$nombre.', '.$apellidos.'"/>'; ?></a></li>
   <li><a href="#!" onclick="cogeIdMi(<?php print($_SESSION['id_usuario']); ?>)">Mi perfil</a></li>
   <li class="divider"></li>
-  <li><a href="#!">Configuración</a></li>
+  <li><a onclick="cargaCentroPrincipal(<?php print($id); ?>);">Configuración</a></li>
 </ul>
 
-
+<div id="centroPrincipal">
 
 <?php
 
@@ -285,7 +307,7 @@ print($_SESSION['email']);
 $usuarios = array();
 $usuarios2 = array();
 //hago la consulta a la BBDD
-$consulta_usuarios = $mysqli->query("SELECT foto_mascota, usuario.id_usuario, recompensa, nombre_mascota, nombre, ubicacion, foto_mascota FROM mascota, usuario WHERE mascota.id_usuario = usuario.id_usuario ORDER BY fecha DESC");
+$consulta_usuarios = $mysqli->query("SELECT estado, foto_mascota, usuario.id_usuario, recompensa, nombre_mascota, nombre, ubicacion FROM mascota, usuario WHERE mascota.id_usuario = usuario.id_usuario ORDER BY fecha DESC");
 
 //$consulta_mascotas = $mysqli->query("SELECT COUNT(*) as contador FROM mascota m, usuario u WHERE u.id_usuario=m.id_usuario GROUP BY u.id_usuario");
 
@@ -303,6 +325,7 @@ for ($i = 0; $i < $num_usuarios; $i++) {
     $usuarios[$i][3] = $r['nombre'];
     $usuarios[$i][4] = $r['ubicacion'];
     $usuarios[$i][5] = $r['foto_mascota'];
+    $usuarios[$i][6] = $r['estado'];
     $id_usuario = $usuarios[$i][0];
     $consulta_count = $mysqli->query("SELECT COUNT(*) AS Contador from mascota WHERE id_usuario = $id_usuario");
   
@@ -341,7 +364,24 @@ for ($i = 0; $i < $num_usuarios; $i++) {
 echo '<div class="grid" style="margin-top: 10%;">';
 for ($i = 0; $i < $num_usuarios; $i++) {
 
-echo '<div class="grid-item hvr-float"><img src="img/'. $usuarios[$i][5] .'.jpg" style="width:100%; border-radius: 12px 12px 0px 0px;"/>';
+$estado = $usuarios[$i][6];
+$color = "";
+if ($estado === "Perdido"){
+$color = "colorPerdido";
+}elseif($estado === "Encontrado"){
+  $color = "colorEncontrado";
+}elseif($estado === "Recuperado"){
+  $color = "colorRecuperado";
+}elseif($estado === "Adopcion"){
+  $color = "colorAdopcion";
+}elseif($estado === "Adoptado"){
+  $color = "colorAdoptado";
+}else{
+  $color = "";
+}
+
+
+echo '<div class="grid-item hvr-float"><img class="'.$color.'" src="img/'. $usuarios[$i][5] .'.jpg" style="width:100%; border-radius: 12px 12px 0px 0px;"/>';
 echo ' <div id="cajas2">';
 echo '     <p class="color1">Recompensa: '  . $usuarios[$i][1] . '€</p>';
 echo '     <p>' . $usuarios[$i][2] . '</p>';
@@ -461,6 +501,7 @@ echo '</div>';
    <div id="errorConf"></div>
   </div>    
 
+</div>
 
 
     </body>
@@ -515,6 +556,22 @@ $('.datepicker').pickadate({
 
 
 $(".dropdown-button").dropdown();
+
+
+
+function cargaCentroPrincipal(id) {
+
+              var _id_usuario = id;
+
+
+              // console.log(_id_usuario);
+              // console.log(_tipo);
+
+                $('#centroPrincipal').load("miConfiguracion.php", {
+                    id_usuario: _id_usuario
+                });
+
+      }    
 
 </script>
 </html>

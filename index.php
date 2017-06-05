@@ -549,8 +549,8 @@ $t = $consulta_total->fetch_array();
 
 							<section class="box special">
 								<span class="image featured"><img src="images/pic02.jpg" alt="" /></span>
-								<h3>Sed lorem adipiscing</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+								<h3>Tobby</h3>
+								<p>Es el guardián de nuestra casa, se ha perdido y suele comer bastante, no recomendable quedarselo. Si lo encuentras por favor contacta con nosotros.</p>
 								<ul class="actions">
 									<li><a href="#" class="button alt">Learn More</a></li>
 								</ul>
@@ -560,9 +560,9 @@ $t = $consulta_total->fetch_array();
 						<div class="6u 12u(narrower)">
 
 							<section class="box special">
-								<span class="image featured"><img src="images/pic03.jpg" alt="" /></span>
-								<h3>Accumsan integer</h3>
-								<p>Integer volutpat ante et accumsan commophasellus sed aliquam feugiat lorem aliquet ut enim rutrum phasellus iaculis accumsan dolore magna aliquam veroeros.</p>
+								<span class="image featured"><img src="images/bg.jpg" alt="" /></span>
+								<h3>Gordeti</h3>
+								<p>Pertenece a nuestra familia, y se perdió mientras estabamos en un parque. Es muy amigable, nada agresivo. Si lo encuentras llamanos.</p>
 								<ul class="actions">
 									<li><a href="#" class="button alt">Learn More</a></li>
 								</ul>
@@ -735,7 +735,7 @@ $('.counter').each(function() {
 
 
     //Set countdown goal here   
-   var goalDay = '2017/06/14 20:00:00'
+   var goalDay = '2017/06/06 10:45:00'
 
    var timerId = 0;
    timerId = setInterval(function() {

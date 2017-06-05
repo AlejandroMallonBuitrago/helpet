@@ -23,7 +23,7 @@ if (isset($_GET['i'])){
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <style type="text/css">
-	
+  
 
 /* 
 * Art by @jofpin 
@@ -53,16 +53,16 @@ a {
 }
 
 .profile-user-page .img-user-profile {
-	margin: 0 auto;
+  margin: 0 auto;
   text-align: center; 
 }
 .profile-user-page .img-user-profile .profile-bgHome {
-	border-bottom: .2em solid #f5f5f5;
+  border-bottom: .2em solid #f5f5f5;
   width: 100%;
   height: 16em;
   }
 .profile-user-page .img-user-profile .avatar {
-	margin: 0 auto;
+  margin: 0 auto;
   background: #fff;
   width: 7em;
   height: 7em;
@@ -72,7 +72,7 @@ a {
   box-shadow: 0 0 .1em rgba(0, 0, 0, 0.35);
 }
 .profile-user-page button {
-	position: absolute;
+  position: absolute;
   font-size: 13px;
   font-weight: bold;
   cursor: pointer;
@@ -101,7 +101,7 @@ a {
   margin-bottom: 0; 
 }
 .profile-user-page .user-profile-data p {
-	font-family: "Lato", sans-serif;
+  font-family: "Lato", sans-serif;
   color: #8899a6; 
   font-size: 1.1em;
   margin-top: 0;
@@ -113,7 +113,7 @@ a {
     padding-bottom: 60px;
 }
 .profile-user-page .data-user {
-	font-family: "Quicksand", sans-serif;
+  font-family: "Quicksand", sans-serif;
   margin-bottom: 0;
   cursor: pointer;
   padding: 0;
@@ -181,6 +181,110 @@ footer h4 a {
   text-decoration: none;
   color: #3498db;
 }
+
+
+/* ----------------------------------------------------------- */
+
+/*__________________________Cajas Animales_____________________________*/
+
+
+#cajas{
+   
+    margin-left: 2%;
+    margin-top: 2%;
+    background-color: white;
+    border-radius: 12px 12px 12px 12px;
+    width: 250px;
+    float: left;
+/*    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);*/
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.1), 0 2px 5px 0 transparent;
+/*    display: block;
+    overflow: hidden;
+    position: static;*/
+    font-size: 0.7rem;
+    line-height: 0.8rem;
+   
+    
+/*    display: inline-block;
+    break-inside: avoid;*/
+
+}
+
+#cajas2{
+   
+    height: 100px;
+    background-color: white;
+    padding: 1rem .7rem;
+    transition: all .25s ease;
+}
+
+#cajas3{
+   
+    height: 54px;
+    background-color: white;
+    border-radius: 0px 0px 12px 12px;
+    border: 1px solid #f1f1f1;
+    padding-left: 10px;
+    padding-bottom: 70px;
+}
+
+#cajas3:hover {
+    
+    background-color: #f6f6f6;
+    cursor: pointer;
+    border-color: #f1f1f1;
+}
+
+/*-------------------------MASONRY----------------------------*/
+
+/* * { box-sizing: border-box; }
+
+body { font-family: sans-serif; }*/
+
+/* ---- grid ---- */
+
+.grid {
+  max-width: 100%;
+  padding-left: 5%;
+}
+
+/* clearfix */
+.grid:after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+/* ---- grid-item ---- */
+
+.grid-item {
+
+  float: left;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    width: 200px;
+    border-radius: 12px 12px 12px 12px;
+  font-size: 0.7rem;
+  line-height: 0.8rem;
+
+}
+
+.grid-item:hover {
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+img {
+    border-radius: 5px 5px 0 0;
+}
+
+.hvr-float:hover,
+.hvr-float:focus,
+.hvr-float:active {
+  transform: translateY(-8px);
+}
+
+
 </style>
 
 </head>
@@ -249,8 +353,10 @@ $adn = $consulta_adopcion->fetch_array();
   <li><a href="#!">Hola, <?php print($_SESSION['nombre']); ?> <?php  echo '<img style="border-radius: 100%; width: 50px;  vertical-align: middle; margin-left: 15px;" src="'.$foto.'" alt="helpet | '.$nombre.', '.$apellidos.'"/>'; ?></a></li>
   <li><a href="#!" onclick="cogeIdMi(<?php print($_SESSION['id_usuario']); ?>)">Mi perfil</a></li>
   <li class="divider"></li>
-  <li><a href="#!">Configuración</a></li>
+  <li><a onclick="cargaCentroPrincipal(<?php print($id); ?>);">Configuración</a></li>
 </ul>
+
+<div id="centroPrincipal">
 
 <!-- -----------------------------Perfil------------------------------ -->
 
@@ -280,36 +386,35 @@ $adn = $consulta_adopcion->fetch_array();
 
         <?php  echo '<img class="avatar" src="'.$foto.'" alt="helpet | '.$nombre.', '.$apellidos.'"/>'; ?>
            </div>
-          <button>Follow</button>
+          
           <div class="user-profile-data">
             <h1><?php echo $nombre; ?></h1>
             <p style="margin-top: 10px;"><?php echo $email; ?></p>
           </div> 
-          <div class="description-profile"><?php echo $movil.' | '.dias_transcurridos($fecha_a,$fecha_b).' días de antigüedad' // Sino poner fecha de alta  ?></div>
+          <div class="description-profile"><?php echo $movil.' | '.dias_transcurridos($fecha_a,$fecha_b).' días de antigüedad' // Si no poner fecha de alta  ?></div>
        <ul class="data-user">
-        <li><a><strong><?php echo $p['contador'];?></strong><span>Perdidos</span></a></li>
-        <li><a><strong><?php echo $e['contador'];?></strong><span>Encontrados</span></a></li>
-        <li><a><strong><?php echo $adn['contador'];?></strong><span>Adopción</span></a></li>
+        <li><a onclick="cargaCentro('1', <?php print($id); ?>)"><strong><?php echo $p['contador'];?></strong><span>Perdidos</span></a></li>
+        <li><a onclick="cargaCentro('2', <?php print($id); ?>)"><strong><?php echo $e['contador'];?></strong><span>Encontrados</span></a></li>
+        <li><a onclick="cargaCentro('3', <?php print($id); ?>)"><strong><?php echo $adn['contador'];?></strong><span>Adopción</span></a></li>
        </ul>
+
+        <div id="cargaMascotas"></div>
+
       </div>
     </div>
-
-
-<div id="cargaMascotas">
-  
 
 
 
 </div>
 
 
-
 </body>
 
+<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.min.js"></script>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
 <script type="text/javascript">
-	$('.counter2').each(function() {
+  $('.counter2').each(function() {
   var $this = $(this),
       countTo = $this.attr('data-count');
      
@@ -341,7 +446,36 @@ $adn = $consulta_adopcion->fetch_array();
 $(".dropdown-button").dropdown();
 
 
-function cogeId(id) {
+  function cargaCentro(tipo, id) {
+
+              var _id_usuario = id;
+              var _tipo = tipo;
+
+              // console.log(_id_usuario);
+              // console.log(_tipo);
+
+                $('#cargaMascotas').load("cargaMascotasEditar.php", {
+                    id_usuario: _id_usuario,
+                    tipo: _tipo
+                });
+
+      }    
+
+function cargaCentroPrincipal(id) {
+
+              var _id_usuario = id;
+
+
+              // console.log(_id_usuario);
+              // console.log(_tipo);
+
+                $('#centroPrincipal').load("miConfiguracion.php", {
+                    id_usuario: _id_usuario
+                });
+
+      } 
+
+         function cogeId(id) {
                 var _id_usuario = id;
                 console.log(_id_usuario);
 
@@ -349,7 +483,7 @@ function cogeId(id) {
 
                 };
 
-  function cogeIdMi(id) {
+    function cogeIdMi(id) {
                 var _id_usuario = id;
                 console.log(_id_usuario);
 
@@ -361,7 +495,6 @@ function cogeId(id) {
   itemSelector: '.grid-item',
   columnWidth: 220
   });
-
 
 </script>
 </html>

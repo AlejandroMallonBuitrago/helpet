@@ -343,8 +343,10 @@ $adn = $consulta_adopcion->fetch_array();
   <li><a href="#!">Hola, <?php print($_SESSION['nombre']); ?> <?php  echo '<img style="border-radius: 100%; width: 50px;  vertical-align: middle; margin-left: 15px;" src="'.$foto.'" alt="helpet | '.$nombre.', '.$apellidos.'"/>'; ?></a></li>
   <li><a href="#!" onclick="cogeIdMi(<?php print($_SESSION['id_usuario']); ?>)">Mi perfil</a></li>
   <li class="divider"></li>
-  <li><a href="#!">Configuración</a></li>
+  <li><a onclick="cargaCentroPrincipal(<?php print($_SESSION['id_usuario']); ?>);">Configuración</a></li>
 </ul>
+
+<div id="centroPrincipal">
 
 <!-- -----------------------------Perfil------------------------------ -->
 
@@ -379,11 +381,11 @@ $adn = $consulta_adopcion->fetch_array();
             <h1><?php echo $nombre; ?></h1>
             <p style="margin-top: 10px;"><?php echo $email; ?></p>
           </div> 
-          <div class="description-profile"><?php echo $movil.' | '.dias_transcurridos($fecha_a,$fecha_b).' días de antigüedad' // Sino poner fecha de alta  ?></div>
+          <div class="description-profile"><?php echo $movil.' | '.dias_transcurridos($fecha_a,$fecha_b).' días de antigüedad' // Si no poner fecha de alta  ?></div>
        <ul class="data-user">
-        <li><a onclick="cargaCentro('1')"><strong><?php echo $p['contador'];?></strong><span>Perdidos</span></a></li>
-        <li><a onclick="cargaCentro('2')"><strong><?php echo $e['contador'];?></strong><span>Encontrados</span></a></li>
-        <li><a onclick="cargaCentro('3')"><strong><?php echo $adn['contador'];?></strong><span>Adopción</span></a></li>
+        <li><a onclick="cargaCentro('1', <?php print($id); ?>)"><strong><?php echo $p['contador'];?></strong><span>Perdidos</span></a></li>
+        <li><a onclick="cargaCentro('2', <?php print($id); ?>)"><strong><?php echo $e['contador'];?></strong><span>Encontrados</span></a></li>
+        <li><a onclick="cargaCentro('3', <?php print($id); ?>)"><strong><?php echo $adn['contador'];?></strong><span>Adopción</span></a></li>
        </ul>
 
         <div id="cargaMascotas"></div>
@@ -392,7 +394,7 @@ $adn = $consulta_adopcion->fetch_array();
     </div>
 
 
-
+</div>
 
 
 
@@ -434,7 +436,37 @@ $adn = $consulta_adopcion->fetch_array();
 $(".dropdown-button").dropdown();
 
 
-function cogeId(id) {
+  function cargaCentro(tipo, id) {
+
+              var _id_usuario = id;
+              var _tipo = tipo;
+
+              // console.log(_id_usuario);
+              // console.log(_tipo);
+
+                $('#cargaMascotas').load("cargaMascotas.php", {
+                    id_usuario: _id_usuario,
+                    tipo: _tipo
+                });
+
+      }    
+
+function cargaCentroPrincipal(id) {
+
+              var _id_usuario = id;
+
+
+              // console.log(_id_usuario);
+              // console.log(_tipo);
+
+                $('#centroPrincipal').load("miConfiguracion.php", {
+                    id_usuario: _id_usuario
+                });
+
+      } 
+
+
+     function cogeId(id) {
                 var _id_usuario = id;
                 console.log(_id_usuario);
 
@@ -442,7 +474,7 @@ function cogeId(id) {
 
                 };
 
-  function cogeIdMi(id) {
+    function cogeIdMi(id) {
                 var _id_usuario = id;
                 console.log(_id_usuario);
 
@@ -450,19 +482,10 @@ function cogeId(id) {
 
                 };
 
-
-
-  function cargaCentro(tipo) {
-
-              if(tipo === '1'){
-                $('#cargaMascotas').load("cargaMascotas.php?t=1");
-              }else if(tipo === '2'){
-                $('#cargaMascotas').load("cargaMascotas.php?t=2");
-              }else if(tipo === '3'){
-                $('#cargaMascotas').load("cargaMascotas.php?t=3");
-              }
-      }    
-
+  $('.grid').masonry({
+  itemSelector: '.grid-item',
+  columnWidth: 220
+  });
 
 </script>
 </html>

@@ -56,12 +56,12 @@ if ($numero_usuario > 0) {
             $_SESSION['movil'] = $r['movil'];
             $_SESSION['foto'] = $r['foto'];
             
-           header("location:ventana.php");
+           
             
-            // switch ($tipo) {
-            //     case 0 : require 'ventana.php'; break;
-            //     case 1 : require 'ventanaPropietario.php'; break;
-            // }
+            switch ($tipo) {
+                case 0 : header("location:ventana.php"); break;
+                case 1 : header("location:administrador.php"); break;
+            }
         
         } else {
             

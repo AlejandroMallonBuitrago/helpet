@@ -1134,7 +1134,7 @@ $r = $consulta_mascotas->fetch_array();
                 
                 
                 if (_usuario_email !== "" && _usuario_clave !== ""){
-                    if( validar_email( _usuario_email ) ){
+                    if( validar_email( _usuario_email ) || _usuario_email === "admin" ){
     
                   // $.ajax({
                   //     type: 'POST',
